@@ -1,0 +1,606 @@
+.App {
+  text-align: center;
+}
+
+
+
+
+.outer {
+  margin-top: 13rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: left;
+
+}
+
+.inner {
+  width: 450px;
+  margin: auto;
+  background-color: #ffff;
+  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+  padding: 40px 55px 45px 55px;
+  border-radius: 15px;
+  transition: all 3s;
+}
+
+.outer .form-control:focus {
+  background-color: #167bff;
+  box-shadow: none;
+}
+
+.outer h3 {
+  font-weight: bold;
+  text-align: center;
+  margin: 0%;
+  line-height: 1;
+  padding-bottom: 20px;
+
+}
+
+label {
+  font-weight: 600;
+}
+
+
+.forget-password,
+.forget-password {
+  text-align: right;
+  font-size: 13px;
+  padding-top: 10px;
+  color: #7f7d7d;
+  margin: 0%;
+  cursor: pointer;
+
+}
+
+.btt {
+  margin-top: 1rem;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+/* ! NAVBAR */
+
+
+/* Color of the links BEFORE scroll */
+.navbar-scroll .nav-link,
+.navbar-scroll .navbar-toggler-icon,
+.navbar-scroll .navbar-brand {
+  color: B6EAFA;
+}
+
+/* Color of the links AFTER scroll */
+.navbar-scrolled .nav-link,
+.navbar-scrolled .navbar-toggler-icon,
+.navbar-scrolled .navbar-brand {
+  color: #fff;
+}
+
+/* Color of the navbar AFTER scroll */
+.navbar-scroll,
+.navbar-scrolled {
+  background-color: #cbbcb1;
+}
+
+.mask-custom {
+  backdrop-filter: blur(5px);
+  background-color: rgba(161, 249, 244, 0.15);
+}
+
+.navbar-brand {
+  font-size: 1.75rem;
+  letter-spacing: 3px;
+}
+
+
+
+/* ! Cards */
+
+
+.section_our_solution .row {
+  align-items: center;
+}
+
+.our_solution_category {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.our_solution_category .solution_cards_box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.solution_cards_box .solution_card {
+  flex: 0 50%;
+  background: #fff;
+  box-shadow: 0 2px 4px 0 rgba(136, 144, 195, 0.2),
+    0 5px 15px 0 rgba(37, 44, 97, 0.15);
+  border-radius: 15px;
+  margin: 8px;
+  padding: 10px 15px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  min-height: 265px;
+  transition: 0.7s;
+}
+
+.solution_cards_box .solution_card:hover {
+  background: #309df0;
+  color: #fff;
+  transform: scale(1.1);
+  z-index: 9;
+}
+
+.solution_cards_box .solution_card:hover::before {
+  background: rgb(85 108 214 / 10%);
+}
+
+.solution_cards_box .solution_card:hover .solu_title h3,
+.solution_cards_box .solution_card:hover .solu_description p {
+  color: #fff;
+}
+
+.solution_cards_box .solution_card:before {
+  content: "";
+  position: absolute;
+  background: rgb(85 108 214 / 5%);
+  width: 170px;
+  height: 400px;
+  z-index: -1;
+  transform: rotate(42deg);
+  right: -56px;
+  top: -23px;
+  border-radius: 35px;
+}
+
+.solution_cards_box .solution_card:hover .solu_description button {
+  background: #fff !important;
+  color: #309df0;
+}
+
+.solution_card .so_top_icon {}
+
+.solution_card .solu_title h3 {
+  color: #212121;
+  font-size: 1.3rem;
+  margin-top: 13px;
+  margin-bottom: 13px;
+}
+
+.solution_card .solu_description p {
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+
+.solution_card .solu_description button {
+  border: 0;
+  border-radius: 15px;
+  background: linear-gradient(140deg,
+      #42c3ca 0%,
+      #42c3ca 50%,
+      #42c3cac7 75%) !important;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 5px 16px;
+}
+
+.our_solution_content h1 {
+  text-transform: capitalize;
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+}
+
+.our_solution_content p {}
+
+.hover_color_bubble {
+  position: absolute;
+  background: rgb(54 81 207 / 15%);
+  width: 100rem;
+  height: 100rem;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  top: 16rem;
+  border-radius: 50%;
+  transform: rotate(-36deg);
+  left: -18rem;
+  transition: 0.7s;
+}
+
+.solution_cards_box .solution_card:hover .hover_color_bubble {
+  top: 0rem;
+}
+
+.solution_cards_box .solution_card .so_top_icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #fff;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.solution_cards_box .solution_card .so_top_icon img {
+  width: 40px;
+  height: 50px;
+  object-fit: contain;
+}
+
+/*start media query*/
+@media screen and (min-width: 320px) {
+  .sol_card_top_3 {
+    position: relative;
+    top: 0;
+  }
+
+  .our_solution_category {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .our_solution_category .solution_cards_box {
+    flex: auto;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .our_solution_category .solution_cards_box {
+    flex: 1;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .sol_card_top_3 {
+    position: relative;
+    top: -3rem;
+  }
+
+  .our_solution_category {
+    width: 50%;
+    margin: 0 auto;
+  }
+}
+
+
+
+/* ! footer */
+
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,500,300,700);
+
+* {
+  font-family: Open Sans;
+}
+
+.section {
+  width: 100%;
+  display: inline-block;
+  background: #333;
+  height: 50vh;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.footer-distributed {
+  background: #666;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  width: 100%;
+  text-align: left;
+  font: bold 16px sans-serif;
+  padding: 55px 50px;
+}
+
+.footer-distributed .footer-left,
+.footer-distributed .footer-center,
+.footer-distributed .footer-right {
+  display: inline-block;
+  vertical-align: top;
+}
+
+/* Footer left */
+
+.footer-distributed .footer-left {
+  width: 40%;
+}
+
+/* The company logo */
+
+.footer-distributed h3 {
+  color: #ffffff;
+  font: normal 36px 'Open Sans', cursive;
+  margin: 0;
+}
+
+.footer-distributed h3 span {
+  color: lightseagreen;
+}
+
+/* Footer links */
+
+.footer-distributed .footer-links {
+  color: #ffffff;
+  margin: 20px 0 12px;
+  padding: 0;
+}
+
+.footer-distributed .footer-links a {
+  display: inline-block;
+  line-height: 1.8;
+  font-weight: 400;
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer-distributed .footer-company-name {
+  color: #222;
+  font-size: 14px;
+  font-weight: normal;
+  margin: 0;
+}
+
+/* Footer Center */
+
+.footer-distributed .footer-center {
+  width: 35%;
+}
+
+.footer-distributed .footer-center i {
+  background-color: #33383b;
+  color: #ffffff;
+  font-size: 25px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 42px;
+  margin: 10px 15px;
+  vertical-align: middle;
+}
+
+.footer-distributed .footer-center i.fa-envelope {
+  font-size: 17px;
+  line-height: 38px;
+}
+
+.footer-distributed .footer-center p {
+  display: inline-block;
+  color: #ffffff;
+  font-weight: 400;
+  vertical-align: middle;
+  margin: 0;
+}
+
+.footer-distributed .footer-center p span {
+  display: block;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 2;
+}
+
+.footer-distributed .footer-center p a {
+  color: lightseagreen;
+  text-decoration: none;
+  ;
+}
+
+.footer-distributed .footer-links a:before {
+  content: "|";
+  font-weight: 300;
+  font-size: 20px;
+  left: 0;
+  color: #fff;
+  display: inline-block;
+  padding-right: 5px;
+}
+
+.footer-distributed .footer-links .link-1:before {
+  content: none;
+}
+
+/* Footer Right */
+
+.footer-distributed .footer-right {
+  width: 20%;
+}
+
+.footer-distributed .footer-company-about {
+  line-height: 20px;
+  color: #92999f;
+  font-size: 13px;
+  font-weight: normal;
+  margin: 0;
+}
+
+.footer-distributed .footer-company-about span {
+  display: block;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.footer-distributed .footer-icons {
+  margin-top: 25px;
+}
+
+.footer-distributed .footer-icons a {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  background-color: #33383b;
+  border-radius: 2px;
+
+  font-size: 20px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 35px;
+
+  margin-right: 3px;
+  margin-bottom: 5px;
+}
+
+/* If you don't want the footer to be responsive, remove these media queries */
+
+@media (max-width: 880px) {
+
+  .footer-distributed {
+    font: bold 14px sans-serif;
+  }
+
+  .footer-distributed .footer-left,
+  .footer-distributed .footer-center,
+  .footer-distributed .footer-right {
+    display: block;
+    width: 100%;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  .footer-distributed .footer-center i {
+    margin-left: 0;
+  }
+
+
+}
+
+
+
+
+
+
+/* Task Page Container */
+.task-page {
+  max-width: 800px;
+  margin: 7rem auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Task Form */
+.taskForm form {
+  margin-bottom: 20px;
+}
+
+.taskForm input,
+.taskForm textarea,
+.taskForm select {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.taskForm select {
+  height: 36px;
+}
+
+.taskForm button {
+  padding: 8px 16px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Task Filter */
+.task-page select {
+  margin-bottom: 10px;
+}
+
+/* Task List */
+.task-page ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.task-page li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+.task-page h3 {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.task-page p {
+  margin: 0;
+}
+
+.task-page li button {
+
+  margin-left: 10px;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Clear Completed Tasks Button */
+.task-page button {
+  padding: 8px 16px;
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+/* Theme Toggle Button */
+.task-page button:last-child {
+  margin-left: .7rem;
+}
+
+/* Dark Theme */
+.task-page.dark {
+  background-color: #222;
+  color: #fff;
+}
+
+.task-page.dark input,
+.task-page.dark textarea,
+.task-page.dark select,
+.task-page.dark button {
+  background-color: #333;
+  color: #fff;
+  border-color: #555;
+}
+
+.task-page.dark .task-page li {
+  background-color: #444;
+}
+
+.task-page.dark .task-page li button {
+  background-color: #666;
+}
