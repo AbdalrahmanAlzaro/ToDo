@@ -1,19 +1,17 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from "react";
+import { TaskContext } from "../context/TaskContext";
 
 const TaskPage = () => {
-  const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')) || []);
-  const [taskTitle, setTaskTitle] = useState('');
-  const [taskDescription, setTaskDescription] = useState('');
-  const [taskPriority, setTaskPriority] = useState('Normal');
-  const [filterPriority, setFilterPriority] = useState('All');
-  const [filterStatus, setFilterStatus] = useState('All');
-  const [theme, setTheme] = useState('light');
-
-  
+  const { tasks, setTasks } = useContext(TaskContext);
+  const [taskTitle, setTaskTitle] = useState("");
+  const [taskDescription, setTaskDescription] = useState("");
+  const [taskPriority, setTaskPriority] = useState("Normal");
+  const [filterPriority, setFilterPriority] = useState("All");
+  const [filterStatus, setFilterStatus] = useState("All");
+  const [theme, setTheme] = useState("light");
 
   useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
   const addTask = () => {
@@ -22,12 +20,12 @@ const TaskPage = () => {
       title: taskTitle,
       description: taskDescription,
       priority: taskPriority,
-      status: 'Incomplete',
+      status: "Incomplete",
     };
     setTasks([...tasks, newTask]);
-    setTaskTitle('');
-    setTaskDescription('');
-    setTaskPriority('Normal');
+    setTaskTitle("");
+    setTaskDescription("");
+    setTaskPriority("Normal");
   };
 
   const deleteTask = (taskId) => {
@@ -46,7 +44,7 @@ const TaskPage = () => {
   };
 
   const clearCompletedTasks = () => {
-    const updatedTasks = tasks.filter((task) => task.status === 'Incomplete');
+    const updatedTasks = tasks.filter((task) => task.status === "Incomplete");
     setTasks(updatedTasks);
   };
 
@@ -59,27 +57,24 @@ const TaskPage = () => {
   };
 
   const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+    setTheme(theme === "light" ? "dark" : "light");
   };
 
   const filteredTasks = tasks.filter((task) => {
-    if (filterPriority === 'All' && filterStatus === 'All') {
+    if (filterPriority === "All" && filterStatus === "All") {
       return true;
     }
-    if (filterPriority !== 'All' && task.priority !== filterPriority) {
+    if (filterPriority !== "All" && task.priority !== filterPriority) {
       return false;
     }
-    if (filterStatus !== 'All' && task.status !== filterStatus) {
+    if (filterStatus !== "All" && task.status !== filterStatus) {
       return false;
     }
     return true;
   });
 
-
-
-
   return (
-    <div className='aa'>
+    <div className="aa">
       <div className={`task-page ${theme}`}>
         <h1>Task Page</h1>
 
@@ -110,8 +105,9 @@ const TaskPage = () => {
             <option value="Low priority">Low priority</option>
           </select>
 
-
-          <button onClick={addTask} className='buttonTask' >Save</button>
+          <button onClick={addTask} className="buttonTask">
+            Save
+          </button>
         </form>
         <div>
           <label> by Priority:</label>
@@ -145,21 +141,34 @@ const TaskPage = () => {
               <p>{task.description}</p>
               <p>Priority: {task.priority}</p>
               <p>Status: {task.status}</p>
-              <button className='buttonTask' onClick={() => changeTaskStatus(task.id, 'Complete')}>
+              <button
+                className="buttonTask"
+                onClick={() => changeTaskStatus(task.id, "Complete")}
+              >
                 Complete
               </button>
-              <button className='buttonTask' onClick={() => changeTaskStatus(task.id, 'Incomplete')}>
+              <button
+                className="buttonTask"
+                onClick={() => changeTaskStatus(task.id, "Incomplete")}
+              >
                 Incomplete
               </button>
-              <button className='buttonTask' onClick={() => deleteTask(task.id)}>Delete</button>
+              <button
+                className="buttonTask"
+                onClick={() => deleteTask(task.id)}
+              >
+                Delete
+              </button>
             </div>
           ))}
         </div>
 
-        <button className='buttonTask' onClick={clearCompletedTasks}>Clear Completed Tasks</button>
+        <button className="buttonTask" onClick={clearCompletedTasks}>
+          Clear Completed Tasks
+        </button>
 
-        <button className='buttonTask' onClick={toggleTheme}>
-          {theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+        <button className="buttonTask" onClick={toggleTheme}>
+          {theme === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"}
         </button>
       </div>
     </div>
@@ -167,5 +176,3 @@ const TaskPage = () => {
 };
 
 export default TaskPage;
-
-
