@@ -1,163 +1,171 @@
+
 import React, { useState, useEffect } from 'react';
 
 const TaskPage = () => {
-    const [tasks, setTasks] = useState([]);
-    const [filteredTasks, setFilteredTasks] = useState([]);
-    const [taskTitle, setTaskTitle] = useState('');
-    const [taskDescription, setTaskDescription] = useState('');
-    const [taskPriority, setTaskPriority] = useState('Normal');
-    const [taskStatusFilter, setTaskStatusFilter] = useState('All');
-    const [theme, setTheme] = useState('light');
+  const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')) || []);
+  const [taskTitle, setTaskTitle] = useState('');
+  const [taskDescription, setTaskDescription] = useState('');
+  const [taskPriority, setTaskPriority] = useState('Normal');
+  const [filterPriority, setFilterPriority] = useState('All');
+  const [filterStatus, setFilterStatus] = useState('All');
+  const [theme, setTheme] = useState('light');
 
+  
 
-    useEffect(() => {
-        // Save tasks to local storage whenever tasks change
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-        filterTasksByStatus();
-    }, [tasks]);
-    
-    useEffect(() => {
-        // Load tasks from local storage on component mount
-        const savedTasks = JSON.parse(localStorage.getItem('tasks'));
-        if (savedTasks) {
-            setTasks(savedTasks);
-            setFilteredTasks(savedTasks);
-        }
-    }, []);
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
 
-    
-
-    const handleTaskTitleChange = (e) => {
-        setTaskTitle(e.target.value);
+  const addTask = () => {
+    const newTask = {
+      id: Date.now(),
+      title: taskTitle,
+      description: taskDescription,
+      priority: taskPriority,
+      status: 'Incomplete',
     };
+    setTasks([...tasks, newTask]);
+    setTaskTitle('');
+    setTaskDescription('');
+    setTaskPriority('Normal');
+  };
 
-    const handleTaskDescriptionChange = (e) => {
-        setTaskDescription(e.target.value);
-    };
+  const deleteTask = (taskId) => {
+    const updatedTasks = tasks.filter((task) => task.id !== taskId);
+    setTasks(updatedTasks);
+  };
 
-    const handleTaskPriorityChange = (e) => {
-        setTaskPriority(e.target.value);
-    };
+  const changeTaskStatus = (taskId, newStatus) => {
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === taskId) {
+        return { ...task, status: newStatus };
+      }
+      return task;
+    });
+    setTasks(updatedTasks);
+  };
 
-    const handleTaskStatusFilterChange = (e) => {
-        setTaskStatusFilter(e.target.value);
-        filterTasksByStatus(e.target.value);
-    };
+  const clearCompletedTasks = () => {
+    const updatedTasks = tasks.filter((task) => task.status === 'Incomplete');
+    setTasks(updatedTasks);
+  };
 
-    const handleThemeChange = () => {
+  const filterTasksByPriority = (priority) => {
+    setFilterPriority(priority);
+  };
 
-        setTheme(theme === 'light' ? 'dark' : 'light');
-    };
+  const filterTasksByStatus = (status) => {
+    setFilterStatus(status);
+  };
 
-    const handleSaveTask = () => {
-        if (taskTitle === '') {
-            alert('Please enter a task title.');
-            return;
-        }
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
 
-        const newTask = {
-            id: Date.now(),
-            title: taskTitle,
-            description: taskDescription,
-            priority: taskPriority,
-            status: 'Incomplete',
-        };
+  const filteredTasks = tasks.filter((task) => {
+    if (filterPriority === 'All' && filterStatus === 'All') {
+      return true;
+    }
+    if (filterPriority !== 'All' && task.priority !== filterPriority) {
+      return false;
+    }
+    if (filterStatus !== 'All' && task.status !== filterStatus) {
+      return false;
+    }
+    return true;
+  });
 
-        setTasks((prevTasks) => [...prevTasks, newTask]);
-        setTaskTitle('');
-        setTaskDescription('');
-        setTaskPriority('Normal');
-    };
 
-    const handleTaskStatusChange = (taskId, newStatus) => {
-        const updatedTasks = tasks.map((task) =>
-            task.id === taskId ? { ...task, status: newStatus } : task
-        );
-        setTasks(updatedTasks);
-    };
 
-    const handleDeleteTask = (taskId) => {
-        const updatedTasks = tasks.filter((task) => task.id !== taskId);
-        setTasks(updatedTasks);
-    };
 
-    const handleClearCompletedTasks = () => {
-        const updatedTasks = tasks.filter((task) => task.status !== 'Complete');
-        setTasks(updatedTasks);
-    };
+  return (
+    <div className='aa'>
+      <div className={`task-page ${theme}`}>
+        <h1>Task Page</h1>
 
-    const filterTasksByStatus = (status = taskStatusFilter) => {
-        if (status === 'All') {
-            setFilteredTasks(tasks);
-        } else {
-            const filtered = tasks.filter((task) => task.status === status);
-            setFilteredTasks(filtered);
-        }
+        <form onSubmit={(e) => e.preventDefault()}>
+          <label htmlFor="taskTitle">Task Title:</label>
+          <input
+            type="text"
+            id="taskTitle"
+            value={taskTitle}
+            onChange={(e) => setTaskTitle(e.target.value)}
+          />
 
-        // const tasksInfo =localStorage.Item('tasks', JSON.parse(task));
-    };
+          <label htmlFor="taskDescription">Task Description:</label>
+          <textarea
+            id="taskDescription"
+            value={taskDescription}
+            onChange={(e) => setTaskDescription(e.target.value)}
+          />
 
-    return (
-        <div className={`task-page ${theme} taskForm`}>
-            <h1>Task Page</h1>
+          <label htmlFor="taskPriority">Task Priority:</label>
+          <select
+            id="taskPriority"
+            value={taskPriority}
+            onChange={(e) => setTaskPriority(e.target.value)}
+          >
+            <option value="Critical">Critical</option>
+            <option value="Normal">Normal</option>
+            <option value="Low priority">Low priority</option>
+          </select>
 
-            {/* Task Form */}
-            <form>
-                <input
-                    type="text"
-                    value={taskTitle}
-                    onChange={handleTaskTitleChange}
-                    placeholder="Task Title"
-                />
-                <textarea
-                    value={taskDescription}
-                    onChange={handleTaskDescriptionChange}
-                    placeholder="Task Description"
-                />
-                <select value={taskPriority} onChange={handleTaskPriorityChange}>
-                    <option value="Critical">Critical</option>
-                    <option value="Normal">Normal</option>
-                    <option value="Low">Low</option>
-                </select>
-                <button type="button" onClick={handleSaveTask}>Save</button>
-            </form>
 
-            {/* Task Filter */}
-            <div>
-                <select value={taskStatusFilter} onChange={handleTaskStatusFilterChange}>
-                    <option value="All">All</option>
-                    <option value="Incomplete">Incomplete</option>
-                    <option value="Complete">Complete</option>
-                </select>
-            </div>
-
-            {/* Task List */}
-            <ul>
-                {filteredTasks.map((task) => (
-                    <li key={task.id}>
-                        <div>
-                            <h3>Title: {task.title}</h3>
-                            <p>Description: {task.description}</p>
-                            <p>Priority: {task.priority}</p>
-                            <p>Status: {task.status}</p>
-                        </div>
-                        <div>
-                            <button onClick={() => handleTaskStatusChange(task.id, 'Complete')}>Complete</button>
-                            <button onClick={() => handleTaskStatusChange(task.id, 'Incomplete')}>Incomplete</button>
-                            <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
-                        </div>
-                    </li>
-                ))}
-            </ul>
-
-            {/* Clear Completed Tasks */}
-            <button onClick={handleClearCompletedTasks}>Clear Completed Tasks</button>
-
-            {/* Theme Toggle */}
-            <button onClick={handleThemeChange}>Switch theme</button>
+          <button onClick={addTask} className='buttonTask' >Save</button>
+        </form>
+        <div>
+          <label> by Priority:</label>
+          <select
+            value={filterPriority}
+            onChange={(e) => filterTasksByPriority(e.target.value)}
+          >
+            <option value="All">All</option>
+            <option value="Critical">Critical</option>
+            <option value="Normal">Normal</option>
+            <option value="Low priority">Low priority</option>
+          </select>
         </div>
-    );
+
+        <div>
+          <label> by Status:</label>
+          <select
+            value={filterStatus}
+            onChange={(e) => filterTasksByStatus(e.target.value)}
+          >
+            <option value="All">All</option>
+            <option value="Complete">Complete</option>
+            <option value="Incomplete">Incomplete</option>
+          </select>
+        </div>
+
+        <div className="task-list">
+          {filteredTasks.map((task) => (
+            <div key={task.id} className="task-item">
+              <h3>{task.title}</h3>
+              <p>{task.description}</p>
+              <p>Priority: {task.priority}</p>
+              <p>Status: {task.status}</p>
+              <button className='buttonTask' onClick={() => changeTaskStatus(task.id, 'Complete')}>
+                Complete
+              </button>
+              <button className='buttonTask' onClick={() => changeTaskStatus(task.id, 'Incomplete')}>
+                Incomplete
+              </button>
+              <button className='buttonTask' onClick={() => deleteTask(task.id)}>Delete</button>
+            </div>
+          ))}
+        </div>
+
+        <button className='buttonTask' onClick={clearCompletedTasks}>Clear Completed Tasks</button>
+
+        <button className='buttonTask' onClick={toggleTheme}>
+          {theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default TaskPage;
+
 

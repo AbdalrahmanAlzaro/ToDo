@@ -1,16 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Alert from 'react-bootstrap/Alert';
+import { Link } from 'react-router-dom'
 
 const Content = () => {
+
+    const [name, setName] = useState(JSON.parse(localStorage.getItem('Name')) || 'none')
+
     return (
         <div>
             <main>
                 <>
-
                     <link
                         rel="stylesheet"
                         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
                     />
                     <div
+
                         className="p-5 text-center bg-image rounded-3 mb-5"
                         style={{
                             backgroundSize: 'cover',
@@ -18,22 +23,25 @@ const Content = () => {
                                 'url("https://img.freepik.com/free-photo/top-view-notebook-clock-arrangement_23-2148604890.jpg?w=996&t=st=1683840674~exp=1683841274~hmac=899029bb3f76ef6b91220c4eb4ffe556ce13b7655af60c09b21df6219acf1545")',
                             height: 800
 
-                        }}
-                    >
+                        }}>
                         <div className="mask" style={{ backgroundColor: "rgba(0, 0, 0, 0.6)" }}>
                             <div className=" mt-5 d-flex justify-content-center align-items-center h-100">
                                 <div className="  text-white">
+                                    <Alert variant="success">
+                                        <h1>welcome {name}</h1>
+                                    </Alert>
                                     <h1 className="mb-3">How to do ?</h1>
+
                                     <h4 className="mb-3">This website will help you manage your time more efficiently.
                                     </h4>
-                                    <a className=" mb-3 btn btn-outline-light btn-lg" href="#!" role="button">
-                                        Join us
-                                    </a>
+                                    <Link className=" mb-3 btn btn-outline-light btn-lg" to="AboutUs" role="button">
+                                        About us
+                                    </Link>
                                 </div>
                             </div>
                         </div>
                     </div>
-
+                    {/* hhhhhhhhhhhhhhhhhhhh */}
                     <div className="section_our_solution mt-5">
                         <div className="row">
                             <div className="col-lg-12 col-md-12 col-sm-12">
@@ -131,7 +139,9 @@ const Content = () => {
                                                     Effective time management leads to goal achievement and a sense of accomplishment, while reducing stress and anxiety.
                                                 </p>
                                                 <button type="button" className="read_more_btn">
-                                                    Let's start
+                                                    <Link to="TaskPage">
+                                                        Let's start
+                                                    </Link>
                                                 </button>
                                             </div>
                                         </div>
@@ -227,7 +237,9 @@ const Content = () => {
                                                     Good time management enhances productivity and leads to a better work-life balance.
                                                 </p>
                                                 <button type="button" className="read_more_btn">
-                                                    Let's start
+                                                    <Link to="TaskPage">
+                                                        Let's start
+                                                    </Link>
                                                 </button>
                                             </div>
                                         </div>
@@ -327,7 +339,9 @@ const Content = () => {
                                                     allowing them to focus on what is most important, be more efficient, and get more done in less time.
                                                 </p>
                                                 <button type="button" className="read_more_btn">
-                                                    Let's start
+                                                    <Link to="TaskPage">
+                                                        Let's start
+                                                    </Link>
                                                 </button>
                                             </div>
                                         </div>
@@ -424,7 +438,9 @@ const Content = () => {
                                                     make better decisions.
                                                 </p>
                                                 <button type="button" className="read_more_btn">
-                                                    Let's start
+                                                    <Link to="TaskPage">
+                                                        Let's start
+                                                    </Link>
                                                 </button>
                                             </div>
                                         </div>
@@ -433,6 +449,7 @@ const Content = () => {
                             </div>
                         </div>
                     </div>
+                    {/* hhhhhhhhhhhhhhhhh */}
                 </>
 
             </main>

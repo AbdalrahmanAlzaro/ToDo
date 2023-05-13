@@ -2,7 +2,7 @@ import React from 'react'
 
 const ContactUs = () => {
     return (
-        <div>
+        <div className='bb'>
             <>
                 <link
                     href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
@@ -88,7 +88,7 @@ const ContactUs = () => {
                                             <input
                                                 type="submit"
                                                 defaultValue="Enviar"
-                                                className="btn btn-info btn-block rounded-0 py-2"
+                                                className="btn btn-info btn-block buttonSubmit"
                                             />
                                         </div>
                                     </div>
